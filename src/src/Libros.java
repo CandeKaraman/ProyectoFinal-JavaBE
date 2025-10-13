@@ -28,7 +28,7 @@ public class Libros {
     }
 
     // este metodo busca un libro en especifico por id
-    private Libro getBook(int IdLibro) {
+    public Libro getBook(int IdLibro) {
         Libro aux = null;
         for (int i = 0; i < libros.size(); i++) {
             if (libros.get(i).getId() == IdLibro) {

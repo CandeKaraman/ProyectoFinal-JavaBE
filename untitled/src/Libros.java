@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Libros {
     ArrayList<Libro> libros;
@@ -7,11 +8,11 @@ public class Libros {
         this.libros = new ArrayList<>();
     }
 
-    public void addProducto(Libro libro) {
+    public void addLibro(Libro libro) {
         libros.add(libro);
     }
 
-    public ArrayList<Libro> getProductos() {
+    public ArrayList<Libro> getLibros() {
         ArrayList <Libro> aux= new ArrayList<>();
         aux.addAll(libros);
         return aux;
@@ -26,19 +27,49 @@ public class Libros {
         return aux;
     }
 
-    public String buscarProducto(String nombre) {
-        boolean encontrado=false;
-        Libro aux=null;
-        for(int i = 0; i< libros.size(); i++) {
-            if(nombre.equals(libros.get(i).getNombre())) {
-                encontrado=true;
-                aux= libros.get(i);
+    // este metodo busca un libro en especifico por id
+    private Libro getBook(int IdLibro) {
+        Libro aux = null;
+        for (int i = 0; i < libros.size(); i++) {
+            if (libros.get(i).getId() == IdLibro) {
+                return libros.get(i);
             }
         }
-        if(encontrado){
-        return aux.toString();
-        }else{
-            return "Producto no encontrado";
-        }
+        return null;
     }
+
+    //metodo de editar el precio del libro, decidi solp modificar el precio para no complicarme demasiado
+    // queda para la proxima entrega poder modificarlo completamente.
+    public String editBook(int idLibro) {
+        Libro libro= this.getBook(idLibro);
+        if(libro!=null) {
+            System.out.println("Si desea editar el precio del libro ingrese 1, de lo contrario ingrese 0");
+            Scanner entrada = new Scanner(System.in);
+            int edit = entrada.nextInt();
+            if (edit == 1) {
+                System.out.println("precio actual: " + libro.getPrecio());
+                double precio = entrada.nextDouble();
+                libro.setPrecio(precio);
+                return libro.toString();
+            }
+        }
+         return  "No existe el libro que desea editar";
+    }
+
+    public String deleteBook(int idLibro) {
+        Libro libro= this.getBook(idLibro);
+        if(libro!=null) {
+            System.out.println("Para confirmar la eliminacion escribir 1, de lo contrario ingrese 0");
+            Scanner entrada = new Scanner(System.in);
+            int edit = entrada.nextInt();
+            if (edit == 1) {this.libros.remove(libro);
+                return "Eliminado exitosamente" + libros.toString();
+            } else return "Libro no eliminado";
+
+        }
+        return "no existe el libro";
+    }
+
+
+
 }

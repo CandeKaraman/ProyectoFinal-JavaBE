@@ -2,17 +2,17 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Productos productos = new Productos();
-        Producto pp= new Producto("nose", 100, 14);
-        Producto pp1= new Producto("noseee", 190, 1);
-        Producto pp2= new Producto("nosee", 200, 4);
-        productos.addProducto(pp);
-        productos.addProducto(pp1);
-        productos.addProducto(pp2);
-        System.out.println(productos.buscarProducto("nose"));
-        System.out.println(productos.buscarProducto("nos"));
+      /**  Libros libros = new Libros();
+        Libro pp= new Libro("nose", 100, 14);
+        Libro pp1= new Libro("noseee", 190, 1);
+        Libro pp2= new Libro("nosee", 200, 4);
+        libros.addProducto(pp);
+        libros.addProducto(pp1);
+        libros.addProducto(pp2);
+        System.out.println(libros.buscarProducto("nose"));
+        System.out.println(libros.buscarProducto("nos"));
 
-
+        **/
 
 
     }

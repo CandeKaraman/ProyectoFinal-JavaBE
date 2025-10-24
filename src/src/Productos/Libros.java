@@ -1,20 +1,25 @@
+package Productos;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Libros {
-    ArrayList<Libro> libros;
+    // use en vez de un array un mapa para disminuir la complejidad computacional
+    HashMap<Integer, Libro> libros;
 
     public Libros() {
-        this.libros = new ArrayList<>();
+        this.libros = new HashMap<>();
     }
 
-    public void addLibro(Libro libro) {
-        libros.add(libro);
+    public void addLibro(Libro libro){
+        int id= libro.getId();
+        libros.put(id,libro);
     }
 
     public ArrayList<Libro> getLibros() {
         ArrayList <Libro> aux= new ArrayList<>();
-        aux.addAll(libros);
+        aux.addAll(libros.values());
         return aux;
     }
 
@@ -27,21 +32,16 @@ public class Libros {
         return aux;
     }
 
-    // este metodo busca un libro en especifico por id
-    public Libro getBook(int IdLibro) {
-        Libro aux = null;
-        for (int i = 0; i < libros.size(); i++) {
-            if (libros.get(i).getId() == IdLibro) {
-                return libros.get(i);
-            }
-        }
-        return null;
+    // este metodo busca un libro esta hecho con una clase Filtro que sea mas escalable,
+    // por si el dia de mañana necesito buscar tambien por genero, autor, etc;
+    public Libro getBook(FiltroLibro filtro) {
+        return filtro.buscar();
     }
 
     //metodo de editar el precio del libro, decidi solp modificar el precio para no complicarme demasiado
     // queda para la proxima entrega poder modificarlo completamente.
     public String editBook(int idLibro) {
-        Libro libro= this.getBook(idLibro);
+        Libro libro= this.getBookById(idLibro);
         if(libro!=null) {
             System.out.println("Si desea editar el precio del libro ingrese 1, de lo contrario ingrese 0");
             Scanner entrada = new Scanner(System.in);
@@ -57,17 +57,22 @@ public class Libros {
     }
 
     public String deleteBook(int idLibro) {
-        Libro libro= this.getBook(idLibro);
+        Libro libro= this.getBookById(idLibro);
         if(libro!=null) {
             System.out.println("Para confirmar la eliminacion escribir 1, de lo contrario ingrese 0");
             Scanner entrada = new Scanner(System.in);
             int edit = entrada.nextInt();
             if (edit == 1) {this.libros.remove(libro);
                 return "Eliminado exitosamente" + libros.toString();
-            } else return "Libro no eliminado";
+            } else return "Productos.Libro no eliminado";
 
         }
         return "no existe el libro";
+    }
+// por mas que tengamos un metodo escalable para las distintas busquedas, mantengo
+// este metodo para busquedas por id por su complejidad computacional simple
+    public Libro getBookById(int idLibro) {
+        return this.libros.get(idLibro);
     }
 
 

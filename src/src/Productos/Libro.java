@@ -1,3 +1,5 @@
+package Productos;
+
 public class Libro {
     private static int contadorId = 1;
     private String nombre;
@@ -7,6 +9,9 @@ public class Libro {
     private String genero;
     private int id;
 
+    public Libro(){
+        this.id = contadorId++;
+    }
 
     public Libro(String nombre, double precio, int cantidad,  String autor, String genero) {
         this.nombre = nombre;
@@ -68,7 +73,7 @@ public class Libro {
 
     @Override
     public String toString() {
-        return "Libro{" +
+        return "Productos.Libro{" +
                 "nombre='" + nombre + '\'' +
                 ", precio=" + precio +
                 ", cantidad=" + cantidad +
